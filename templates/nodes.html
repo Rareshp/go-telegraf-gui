@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enter Node Details</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <h1>Enter OPCUA Details</h1>
+    <form action="/generate" method="post">
+        <input type="hidden" name="name" value="{{.Name}}">
+        <input type="hidden" name="endpoint" value="{{.Endpoint}}">
+        <input type="hidden" name="num_nodes" value="{{.NumNodes}}">
+
+        {{range $i, $e := .Nodes}}
+        <h3>Node {{$i}}</h3>
+        <label for="name{{$i}}">Name:
+            <span class="tooltip">?
+                <span class="tooltiptext">Will become a tag name.</span>
+            </span>
+        </label><br>
+        <input type="text" id="name{{$i}}" name="name{{$i}}" required><br><br>
+
+        <label for="namespace{{$i}}">Namespace:
+            <span class="tooltip">?
+                <span class="tooltiptext">OPC UA namespace of the node (integer value between 0 and 3).</span>
+            </span>
+        </label><br>
+        <input type="text" id="namespace{{$i}}" name="namespace{{$i}}" value="2" required><br><br>
+
+        <label for="identifier_type{{$i}}">Identifier Type:
+            <span class="tooltip">?
+                <span class="tooltiptext">OPC UA ID type (s=string, i=integer/numeric, g=guid, b=opaque).</span>
+            </span>
+        </label><br>
+        <input type="text" id="identifier_type{{$i}}" name="identifier_type{{$i}}" value="s" required><br><br>
+
+        <label for="identifier{{$i}}">Identifier:
+            <span class="tooltip">?
+                <span class="tooltiptext">OPC UA ID (as shown in a OPCUA Browser; could be "2262" or even "Studio.Tags.System.String").</span>
+            </span>
+        </label><br>
+        <input type="text" id="identifier{{$i}}" name="identifier{{$i}}" required><br><br>
+        {{end}}
+
+        <input type="submit" value="Generate Config">
+    </form>
+</body>
+</html>
