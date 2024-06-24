@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telegraf OPCUA Config</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <h1>Basic Telegraf OPCUA Config</h1>
+    <form action="/nodes" method="post">
+        <label for="name">Name:
+            <span class="tooltip">?
+                <span class="tooltiptext">Will become a bucket in influxdb.</span>
+            </span>
+        </label><br>
+        <input type="text" id="name" name="name" value="opcua" required><br><br>
+
+        <label for="endpoint">Endpoint URL:</label><br>
+        <input type="text" id="endpoint" name="endpoint" value="opc.tcp://127.0.0.1:48010" required><br><br>
+
+        <label for="num_nodes">Number of Nodes:</label><br>
+        <input type="number" id="num_nodes" name="num_nodes" value="1" min="1" required><br><br>
+
+        <input type="submit" value="Next">
+    </form>
+</body>
+</html>
