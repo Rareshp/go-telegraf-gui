@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-  "strings"
+	"strings"
 )
 
 // Config structure to hold form data
@@ -90,31 +90,31 @@ func generateHandler(w http.ResponseWriter, r *http.Request) {
 
 func generateConfigContent(config Config) string {
 	var sb strings.Builder
-  sb.WriteString(`## Simply copy paste the code below in your telegraf.conf`)
+	sb.WriteString(`## Simply copy paste the code below in your telegraf.conf`)
 	sb.WriteString(`[[inputs.opcua]]` + "\n")
 	sb.WriteString(`  name = "` + config.Name + `"` + "\n\n")
 	sb.WriteString(`  endpoint = "` + config.Endpoint + `"` + "\n\n")
-  sb.WriteString(`  ## Maximum time allowed to establish a connect to the endpoint.` + "\n")
-  sb.WriteString(`  connect_timeout = "10s"` + "\n\n")
-  sb.WriteString(`  ## Maximum time allowed for a request over the estabilished connection.` + "\n")
-  sb.WriteString(`  request_timeout = "5s"` + "\n\n")
-  sb.WriteString(`  ## Security policy, one of "None", "Basic128Rsa15", "Basic256", "Basic256Sha256", or "auto".` + "\n")
-  sb.WriteString(`  security_policy = "None"` + "\n\n")
-  sb.WriteString(`  ## Security mode, one of "None", "Sign", "SignAndEncrypt", or "auto".` + "\n")
-  sb.WriteString(`  security_mode = "None"` + "\n\n")
-  sb.WriteString(`  ## Path to cert.pem. Required when security mode or policy isn't "None".
-  ## If cert path is not supplied, self-signed cert and key will be generated.
-  # certificate = "/etc/telegraf/cert.pem"
-  ## Path to private key.pem. Required when security mode or policy isn't "None".
-  ## If key path is not supplied, self-signed cert and key will be generated.
-  # private_key = "/etc/telegraf/key.pem"` + "\n\n")
-  sb.WriteString(`  ## Authentication Method, one of "Certificate", "UserName", or "Anonymous".` + "\n")
-  sb.WriteString(`  auth_method = "Anonymous"` + "\n\n")
-  sb.WriteString(`  ## Username. Required for auth_method = "UserName"
-  # username = ""
-
-  ## Password. Required for auth_method = "UserName"
-  # password = ""` + "\n\n")
+	sb.WriteString(`  ## Maximum time allowed to establish a connect to the endpoint.` + "\n")
+	sb.WriteString(`  connect_timeout = "10s"` + "\n\n")
+	sb.WriteString(`  ## Maximum time allowed for a request over the estabilished connection.` + "\n")
+	sb.WriteString(`  request_timeout = "5s"` + "\n\n")
+	sb.WriteString(`  ## Security policy, one of "None", "Basic128Rsa15", "Basic256", "Basic256Sha256", or "auto".` + "\n")
+	sb.WriteString(`  security_policy = "None"` + "\n\n")
+	sb.WriteString(`  ## Security mode, one of "None", "Sign", "SignAndEncrypt", or "auto".` + "\n")
+	sb.WriteString(`  security_mode = "None"` + "\n\n")
+	sb.WriteString(`  ## Path to cert.pem. Required when security mode or policy isn't "None".
+	## If cert path is not supplied, self-signed cert and key will be generated.
+	# certificate = "/etc/telegraf/cert.pem"
+	## Path to private key.pem. Required when security mode or policy isn't "None".
+	## If key path is not supplied, self-signed cert and key will be generated.
+	# private_key = "/etc/telegraf/key.pem"` + "\n\n")
+	sb.WriteString(`  ## Authentication Method, one of "Certificate", "UserName", or "Anonymous".` + "\n")
+	sb.WriteString(`  auth_method = "Anonymous"` + "\n\n")
+	sb.WriteString(`  ## Username. Required for auth_method = "UserName"
+	# username = ""
+	
+	## Password. Required for auth_method = "UserName"
+	# password = ""` + "\n\n")
 	sb.WriteString(`  nodes = [` + "\n")
 	for _, node := range config.Nodes {
 		sb.WriteString(`    {name="` + node.Name + `", namespace="` + node.Namespace + `", identifier_type="` + node.IdentifierType + `", identifier="` + node.Identifier + `"},` + "\n")
